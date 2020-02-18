@@ -6,6 +6,7 @@ STOP_WORDS = [
     'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
     'will', 'with'
 ]
+from collections import Counter
 
 for char in test:
     if char not in punctuations:
@@ -13,21 +14,31 @@ for char in test:
 
 no_case = no_punct.lower()
 
-# jan = "january"
-
-# no_january = no_case.replace(jan, "")
-
-# print(no_january)
-
 no_stop = no_case
 
 for word1 in no_case.split():
     for word2 in STOP_WORDS:
         if word1 == word2:
-            print(word1)
+            # print(word1)
             no_stop = no_stop.replace(" " + word1 + " ", " ")
+        
+for word in STOP_WORDS:
+    if no_case.split()[0] == word:
+        no_stop = no_stop.replace(word + " ", " ")
 
-print(no_stop)
+for word in STOP_WORDS:
+    if no_case.split()[-1] == word:
+        no_stop = no_stop.replace(" " + word, " ")
+
+my_var = no_stop.split()
+
+frequency_report = dict(Counter(my_var))
+
+print(frequency_report)
+
+
+
+
 
 
 
